@@ -9,7 +9,7 @@ const mongoose = require('mongoose');
 const db = process.env.MONGODB_URI;
 
 var origins = {
-	origin: ['http://localhost:8080'],
+	origin: ['*'],
 	optionsSuccessStatus: 200,
 	credentials: false
 };
@@ -25,7 +25,7 @@ mongoose
 	.catch(err => console.log(err));
 
 //Middleware
-app.use(cors());
+app.use(cors(origins));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
