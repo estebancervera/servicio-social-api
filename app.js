@@ -25,7 +25,7 @@ mongoose
 	.catch(err => console.log(err));
 
 //Middleware
-app.use(cors(origins));
+app.use(cors());
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
