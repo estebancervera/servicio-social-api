@@ -1,0 +1,5 @@
+---
+applications:
+  - name: tareas-rest-api
+    random-route: true
+    memory: 128M
