@@ -10,6 +10,10 @@ const peopleSchema = new Schema({
 	image: {
 		type: String
 	},
+	// uuid: {
+	// 	type: String,
+	// 	required: true
+	// },
 	name: {
 		type: String,
 		required: true
@@ -27,8 +31,7 @@ const peopleSchema = new Schema({
 		required: true
 	},
 	active: {
-		type: Boolean,
-		required: false
+		type: Boolean
 	},
 	address: {
 		type: String,

@@ -1,7 +1,8 @@
 require('dotenv').config();
 const express = require('express');
-const app = express();
 const cors = require('cors');
+const app = express();
+
 const mongoose = require('mongoose');
 
 // DB config
@@ -9,8 +10,8 @@ const mongoose = require('mongoose');
 const db = process.env.MONGODB_URI;
 
 var origins = {
-	origin: ['*'],
-	optionsSuccessStatus: 200,
+	origin: '*',
+	methods: ['GET', 'PUT', 'POST', 'DELETE'],
 	credentials: false
 };
 
@@ -25,7 +26,7 @@ mongoose
 	.catch(err => console.log(err));
 
 //Middleware
-app.use(cors());
+app.use(cors(origins));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
