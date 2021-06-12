@@ -1,6 +1,9 @@
 const express = require('express');
 const router = express.Router();
 
+/* Imports AWS Image Functions */
+const { upload } = require('../config/aws');
+
 /* Controllers */
 const {
 	getAllAttendance,
@@ -14,8 +17,8 @@ const {
 
 router.get('/', getAllAttendance);
 router.get('/:id', getAttendance);
-router.post('/', createAttendance);
-router.put('/:id', updateAttendance);
+router.post('/', upload.none(), createAttendance);
+router.put('/:id', upload.none(), updateAttendance);
 router.delete('/:id', deleteAttendance);
 
 module.exports = router;

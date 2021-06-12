@@ -7,6 +7,7 @@ const { upload } = require('../config/aws');
 /* Controllers */
 const {
 	getAllPeople,
+	getAllPeopleList,
 	getPeople,
 	createPeople,
 	updatePeople,
@@ -16,6 +17,7 @@ const {
 //MODELS
 
 router.get('/', getAllPeople);
+router.get('/list', getAllPeopleList);
 router.get('/:id', getPeople);
 router.post('/', upload.single('file'), createPeople);
 router.put('/:id', upload.single('file'), updatePeople);

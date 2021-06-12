@@ -34,10 +34,18 @@ async function getAttendance(req, res) {
 
 async function createAttendance(req, res) {
 	try {
-		if (!req.file) {
-			throw new Error('No image was provided. Images are required');
+		console.log(req.body);
+		if (!req.body.date || !req.body.uuid) {
+			throw new Error('Incomplete Parameters');
 		}
-		const attendance = await new Attendance(req.body);
+
+		const body = {
+			date: req.body.date,
+			uuid: req.body.uuid,
+			people: req.body.people.split(',')
+		};
+
+		const attendance = await new Attendance(body);
 
 		attendance.save();
 
@@ -50,10 +58,20 @@ async function createAttendance(req, res) {
 
 async function updateAttendance(req, res) {
 	try {
-		const updatedAttendance = await Attendance.findByIdAndUpdate(req.params.id, req.body, { new: true });
+		console.log(req.body);
+		if (!req.body.date) {
+			throw new Error('Incomplete Parameters');
+		}
+
+		const attendance = {
+			date: req.body.date,
+			people: req.body.people.split(',')
+		};
+
+		const updatedAttendance = await Attendance.findByIdAndUpdate(req.params.id, attendance, { new: true });
 
 		updatedAttendance.save();
-		res.status(200).json({ error: false, msg: 'Attendance updated', data: updatedProject });
+		res.status(200).json({ error: false, msg: 'Attendance updated', data: updatedAttendance });
 	} catch (error) {
 		console.error(error);
 		res.status(500).json({ error: true, msg: 'ERROR' });

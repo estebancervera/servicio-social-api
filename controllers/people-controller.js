@@ -21,6 +21,26 @@ async function getAllPeople(req, res) {
 	}
 }
 
+async function getAllPeopleList(req, res) {
+	try {
+		const peoples = await People.find({ deleted: false });
+		//	res.set('Access-Control-Allow-Origin', '*');
+		const peopleList = peoples.map(people => {
+			const x = {
+				_id: people._id,
+				name: people.name,
+				last_name: people.last_name
+			};
+			return x;
+		});
+
+		res.status(200).json({ error: false, msg: 'Person returned', data: peopleList });
+	} catch (error) {
+		console.error(error);
+		res.status(500).json({ error: true, msg: 'ERROR' });
+	}
+}
+
 async function getPeople(req, res) {
 	try {
 		if (!req.params.id) {
@@ -156,6 +176,7 @@ async function deletePeople(req, res) {
 
 module.exports = {
 	getAllPeople,
+	getAllPeopleList,
 	getPeople,
 	createPeople,
 	updatePeople,
