@@ -1,3 +1,8 @@
+const passport = require('passport');
+const jwt = require('jsonwebtoken');
+
+const { refreshTokenSecret, accessExpire, accessTokenSecret } = require('../config/config');
+
 const User = require('../models/users');
 
 async function registerUser(req, res) {
@@ -5,13 +10,13 @@ async function registerUser(req, res) {
 		if (!req.body.email) {
 			throw new Error('No email was provided');
 		}
-		const foundUser = await User.findOne({ email: email });
+		const foundUser = await User.findOne({ email: req.body.email });
 		if (foundUser) {
 			throw new Error('Email is already used.');
 		}
 
-		if (!req.body.password) {
-			throw new Error('No password was provided');
+		if (!req.body.password || !req.body.firstname || !req.body.lastname) {
+			throw new Error('Missing Information ');
 		}
 		const newUser = await User.register(new User(req.body), req.body.password);
 
@@ -26,26 +31,32 @@ async function registerUser(req, res) {
 
 async function logInUser(req, res, next) {
 	try {
+		console.log(req.body);
 		passport.authenticate('local', (err, user) => {
 			if (err) {
 				return next(err);
 			}
 			if (!user) {
-				throw new Error('User is missing');
+				throw new Error("User doesn't exist");
 			}
 
 			req.logIn(user, err => {
 				if (err) {
+					console.log(err);
 					throw new Error('Error with the login ');
 				}
 
 				/* User has logged In */
-				const access = jwt.sign({ id: user._id, email: user.email }, process.env.ACCESS_TOKEN_SECRET, {
-					expiresIn: `${process.env.ACCESS_EXPIRES_IN}d`
+				const access = jwt.sign({ id: user._id, email: user.email }, accessTokenSecret, {
+					expiresIn: `${accessExpire}h`
 				});
-				const refresh = jwt.sign({ id: user._id, email: user.email }, process.env.REFRESH_TOKEN_SECRET);
+				//const refresh = jwt.sign({ id: user._id, email: user.email }, refreshTokenSecret);
 				const details = 'User logged In correctly.';
-				return res.status(200).json({ access: access, refresh: refresh, details: details });
+				const userData = {
+					firstname: user.firstname,
+					lastname: user.lastname
+				};
+				return res.status(200).json({ token: access, details: details, user: userData });
 			});
 		})(req, res, next);
 	} catch (error) {

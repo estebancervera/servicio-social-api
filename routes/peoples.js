@@ -4,6 +4,9 @@ const router = express.Router();
 /* Imports AWS Image Functions */
 const { upload } = require('../config/aws');
 
+/* auth */
+const { authenticateAccessToken } = require('../config/auth');
+
 /* Controllers */
 const {
 	getAllPeople,
@@ -16,11 +19,11 @@ const {
 
 //MODELS
 
-router.get('/', getAllPeople);
-router.get('/list', getAllPeopleList);
-router.get('/:id', getPeople);
-router.post('/', upload.single('file'), createPeople);
-router.put('/:id', upload.single('file'), updatePeople);
-router.delete('/:id', deletePeople);
+router.get('/', authenticateAccessToken, getAllPeople);
+router.get('/list', authenticateAccessToken, getAllPeopleList);
+router.get('/:id', authenticateAccessToken, getPeople);
+router.post('/', authenticateAccessToken, upload.single('file'), createPeople);
+router.put('/:id', authenticateAccessToken, upload.single('file'), updatePeople);
+router.delete('/:id', authenticateAccessToken, deletePeople);
 
 module.exports = router;

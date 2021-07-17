@@ -1,15 +1,10 @@
-/* Imports AWS Image Functions */
-
-const { deleteS3 } = require('../config/aws');
-
 /*  Models */
 
-const People = require('../models/peoples');
 const Attendance = require('../models/attendance');
 
 async function getAllAttendance(req, res) {
 	try {
-		const attendances = await Attendance.find({});
+		const attendances = await Attendance.find({}).sort({ date: -1 });
 
 		res.status(200).json({ error: false, msg: 'All Attendance returned', data: attendances });
 	} catch (error) {

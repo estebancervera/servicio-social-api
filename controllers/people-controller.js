@@ -23,7 +23,7 @@ async function getAllPeople(req, res) {
 
 async function getAllPeopleList(req, res) {
 	try {
-		const peoples = await People.find({ deleted: false });
+		const peoples = await People.find({ $and: [{ deleted: false }, { active: true }] });
 		//	res.set('Access-Control-Allow-Origin', '*');
 		const peopleList = peoples.map(people => {
 			const x = {
