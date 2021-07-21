@@ -9,7 +9,7 @@ const { registerUser, logInUser } = require('../controllers/login-controller');
 
 //MODELS
 
-router.post('/register', upload.none(), registerUser);
+//router.post('/register', upload.none(), registerUser);
 router.post('/login', upload.none(), logInUser);
 
 module.exports = router;
