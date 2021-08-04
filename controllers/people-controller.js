@@ -17,7 +17,7 @@ async function getAllPeople(req, res) {
 		res.status(200).json({ error: false, msg: 'Person returned', data: peoples });
 	} catch (error) {
 		console.error(error);
-		res.status(500).json({ error: true, msg: error });
+		res.status(500).json({ error: true, msg: error.message });
 	}
 }
 
@@ -38,7 +38,7 @@ async function getAllPeopleList(req, res) {
 		res.status(200).json({ error: false, msg: 'Person returned', data: peopleList });
 	} catch (error) {
 		console.error(error);
-		res.status(500).json({ error: true, msg: error });
+		res.status(500).json({ error: true, msg: error.message });
 	}
 }
 
@@ -52,7 +52,7 @@ async function getPeople(req, res) {
 		res.status(200).json({ error: false, msg: 'Person returned', data: people });
 	} catch (error) {
 		console.error(error);
-		res.status(500).json({ error: true, msg: error });
+		res.status(500).json({ error: true, msg: error.message });
 	}
 }
 
@@ -158,7 +158,7 @@ async function updatePeople(req, res) {
 		res.status(200).json({ error: false, msg: 'Persona actualizada', data: updatedPeople });
 	} catch (error) {
 		console.error(error);
-		res.status(500).json({ error: true, msg: error });
+		res.status(500).json({ error: true, msg: error.message });
 	}
 }
 
@@ -175,7 +175,7 @@ async function deletePeople(req, res) {
 		res.status(200).json({ error: false, msg: 'Persona Eliminada' });
 	} catch (error) {
 		console.error(error);
-		res.status(500).json({ error: true, msg: error });
+		res.status(500).json({ error: true, msg: error.message });
 	}
 }
 

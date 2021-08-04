@@ -9,7 +9,7 @@ async function getAllAttendance(req, res) {
 		res.status(200).json({ error: false, msg: 'All Attendance returned', data: attendances });
 	} catch (error) {
 		console.error(error);
-		res.status(500).json({ error: true, msg: error });
+		res.status(500).json({ error: true, msg: error.message });
 	}
 }
 
@@ -23,7 +23,7 @@ async function getAttendance(req, res) {
 		res.status(200).json({ error: false, msg: 'Attendance returned', data: attendance });
 	} catch (error) {
 		console.error(error);
-		res.status(500).json({ error: true, msg: error });
+		res.status(500).json({ error: true, msg: error.message });
 	}
 }
 
@@ -47,7 +47,7 @@ async function createAttendance(req, res) {
 		res.status(201).json({ error: false, msg: 'Attendance Created', data: attendance });
 	} catch (error) {
 		console.error(error);
-		res.status(500).json({ error: true, msg: error });
+		res.status(500).json({ error: true, msg: error.message });
 	}
 }
 
@@ -69,7 +69,7 @@ async function updateAttendance(req, res) {
 		res.status(200).json({ error: false, msg: 'Attendance updated', data: updatedAttendance });
 	} catch (error) {
 		console.error(error);
-		res.status(500).json({ error: true, msg: error });
+		res.status(500).json({ error: true, msg: error.message });
 	}
 }
 
@@ -83,7 +83,7 @@ async function deleteAttendance(req, res) {
 		res.status(200).json({ error: false, msg: 'Attendance Deleted' });
 	} catch (error) {
 		console.error(error);
-		res.status(500).json({ error: true, msg: error });
+		res.status(500).json({ error: true, msg: error.message });
 	}
 }
 
