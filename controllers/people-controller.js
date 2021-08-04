@@ -17,7 +17,7 @@ async function getAllPeople(req, res) {
 		res.status(200).json({ error: false, msg: 'Person returned', data: peoples });
 	} catch (error) {
 		console.error(error);
-		res.status(500).json({ error: true, msg: 'ERROR' });
+		res.status(500).json({ error: true, msg: error });
 	}
 }
 
@@ -38,7 +38,7 @@ async function getAllPeopleList(req, res) {
 		res.status(200).json({ error: false, msg: 'Person returned', data: peopleList });
 	} catch (error) {
 		console.error(error);
-		res.status(500).json({ error: true, msg: 'ERROR' });
+		res.status(500).json({ error: true, msg: error });
 	}
 }
 
@@ -60,7 +60,7 @@ async function createPeople(req, res) {
 	try {
 		//console.log(req.body);
 		if (!req.body.name || !req.body.first_last_name || !req.body.birthday || !req.body.gender) {
-			throw new Error('No required information provided');
+			throw new Error('Falto información requerida.');
 		}
 		var person = {
 			//uuid: req.body.uuid,
@@ -100,10 +100,10 @@ async function createPeople(req, res) {
 
 		people.save();
 
-		res.status(201).json({ error: false, msg: 'People Created', data: people });
+		res.status(201).json({ error: false, msg: 'Persona Creada', data: people });
 	} catch (error) {
 		console.error(error);
-		res.status(500).json({ error: true, msg: 'ERROR' });
+		res.status(500).json({ error: true, msg: error });
 	}
 }
 
@@ -111,7 +111,7 @@ async function updatePeople(req, res) {
 	try {
 		//console.log(req.body);
 		if (!req.body.name || !req.body.last_name || !req.body.birthday || !req.body.gender) {
-			throw new Error('No required information provided');
+			throw new Error('Falto información requerida.');
 		}
 		var person = {
 			//uuid: req.body.uuid,
@@ -155,10 +155,10 @@ async function updatePeople(req, res) {
 		}
 
 		//console.log(updatedProject);
-		res.status(200).json({ error: false, msg: 'People updated', data: updatedPeople });
+		res.status(200).json({ error: false, msg: 'Persona actualizada', data: updatedPeople });
 	} catch (error) {
 		console.error(error);
-		res.status(500).json({ error: true, msg: 'ERROR' });
+		res.status(500).json({ error: true, msg: error });
 	}
 }
 
@@ -172,10 +172,10 @@ async function deletePeople(req, res) {
 		deletedPerson.deleted = true;
 		deletedPerson.save();
 
-		res.status(200).json({ error: false, msg: 'Person Deleted' });
+		res.status(200).json({ error: false, msg: 'Persona Eliminada' });
 	} catch (error) {
 		console.error(error);
-		res.status(500).json({ error: true, msg: 'ERROR' });
+		res.status(500).json({ error: true, msg: error });
 	}
 }
 

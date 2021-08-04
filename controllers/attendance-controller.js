@@ -9,7 +9,7 @@ async function getAllAttendance(req, res) {
 		res.status(200).json({ error: false, msg: 'All Attendance returned', data: attendances });
 	} catch (error) {
 		console.error(error);
-		res.status(500).json({ error: true, msg: 'ERROR' });
+		res.status(500).json({ error: true, msg: error });
 	}
 }
 
@@ -31,7 +31,7 @@ async function createAttendance(req, res) {
 	try {
 		console.log(req.body);
 		if (!req.body.date || !req.body.uuid) {
-			throw new Error('Incomplete Parameters');
+			throw new Error('Falta de parametros');
 		}
 
 		const body = {
@@ -47,7 +47,7 @@ async function createAttendance(req, res) {
 		res.status(201).json({ error: false, msg: 'Attendance Created', data: attendance });
 	} catch (error) {
 		console.error(error);
-		res.status(500).json({ error: true, msg: 'ERROR' });
+		res.status(500).json({ error: true, msg: error });
 	}
 }
 
@@ -55,7 +55,7 @@ async function updateAttendance(req, res) {
 	try {
 		console.log(req.body);
 		if (!req.body.date) {
-			throw new Error('Incomplete Parameters');
+			throw new Error('Falta de parametros');
 		}
 
 		const attendance = {
@@ -69,7 +69,7 @@ async function updateAttendance(req, res) {
 		res.status(200).json({ error: false, msg: 'Attendance updated', data: updatedAttendance });
 	} catch (error) {
 		console.error(error);
-		res.status(500).json({ error: true, msg: 'ERROR' });
+		res.status(500).json({ error: true, msg: error });
 	}
 }
 
@@ -83,7 +83,7 @@ async function deleteAttendance(req, res) {
 		res.status(200).json({ error: false, msg: 'Attendance Deleted' });
 	} catch (error) {
 		console.error(error);
-		res.status(500).json({ error: true, msg: 'ERROR' });
+		res.status(500).json({ error: true, msg: error });
 	}
 }
 
