@@ -103,7 +103,7 @@ async function createPeople(req, res) {
 		res.status(201).json({ error: false, msg: 'Persona Creada', data: people });
 	} catch (error) {
 		console.error(error);
-		res.status(500).json({ error: true, msg: error });
+		res.status(500).json({ error: true, msg: error.message });
 	}
 }
 
