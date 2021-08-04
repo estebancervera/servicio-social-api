@@ -110,7 +110,7 @@ async function createPeople(req, res) {
 async function updatePeople(req, res) {
 	try {
 		//console.log(req.body);
-		if (!req.body.name || !req.body.last_name || !req.body.birthday || !req.body.gender) {
+		if (!req.body.name || !req.body.first_last_name || !req.body.birthday || !req.body.gender) {
 			throw new Error('Falto información requerida.');
 		}
 		var person = {
