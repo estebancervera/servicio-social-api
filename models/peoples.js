@@ -18,9 +18,16 @@ const peopleSchema = new Schema({
 		type: String,
 		required: true
 	},
-	last_name: {
+	first_last_name: {
 		type: String,
 		required: true
+	},
+	second_last_name: {
+		type: String,
+		required: true
+	},
+	curp: {
+		type: String
 	},
 	birthday: {
 		type: Date,

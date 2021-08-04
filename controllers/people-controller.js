@@ -29,7 +29,8 @@ async function getAllPeopleList(req, res) {
 			const x = {
 				_id: people._id,
 				name: people.name,
-				last_name: people.last_name
+				first_last_name: people.first_last_name,
+				second_last_name: people.second_last_name
 			};
 			return x;
 		});
@@ -58,18 +59,20 @@ async function getPeople(req, res) {
 async function createPeople(req, res) {
 	try {
 		//console.log(req.body);
-		if (!req.body.name || !req.body.last_name || !req.body.birthday || !req.body.gender) {
+		if (!req.body.name || !req.body.first_last_name || !req.body.birthday || !req.body.gender) {
 			throw new Error('No required information provided');
 		}
 		var person = {
 			//uuid: req.body.uuid,
 			name: req.body.name,
-			last_name: req.body.last_name,
+			first_last_name: req.body.first_last_name,
+			second_last_name: req.body.second_last_name,
 			birthday: req.body.birthday,
 			gender: req.body.gender,
 			active: req.body.active,
 			is_married: req.body.is_married,
 			address: req.body.address,
+			curp: req.body.curp,
 			phone: req.body.phone,
 			education: req.body.education,
 			job: req.body.job,
@@ -113,7 +116,9 @@ async function updatePeople(req, res) {
 		var person = {
 			//uuid: req.body.uuid,
 			name: req.body.name,
-			last_name: req.body.last_name,
+			first_last_name: req.body.first_last_name,
+			second_last_name: req.body.second_last_name,
+			curp: req.body.curp,
 			birthday: req.body.birthday,
 			gender: req.body.gender,
 			active: req.body.active,
