@@ -30,7 +30,7 @@ async function getAttendance(req, res) {
 async function createAttendance(req, res) {
 	try {
 		console.log(req.body);
-		if (!req.body.date || !req.body.uuid || req.body.people) {
+		if (!req.body.date || !req.body.uuid || req.body.people == '') {
 			throw new Error('Falta de parametros');
 		}
 
